@@ -38,7 +38,7 @@ apps:
       PATH: "$SNAP/usr/bin:$SNAP/bin/:$PATH"
       LC_ALL: "C.UTF-8"
       LANG: "C.UTF-8"
-      PYTHONPATH: $SNAP/usr/lib/python3/dist-packages:$SNAP/lib/python3.12/site-packages/
+      PYTHONPATH: $SNAP/usr/lib/python3/dist-packages:$SNAP/lib/python3.10/site-packages/
     command: usr/bin/snapcraft-preload $SNAP/bin/ubuntu-package-status
     plugs:
       - network
@@ -47,6 +47,13 @@ apps:
 parts:
   ubuntu-package-status:
     plugin: python
+    build-packages:
+      - python3.12-dev
+    stage-packages:
+      - libpython3.12-minimal
+      - libpython3.12-stdlib
+      - python3.12-minimal
+      - python3.12-venv
     python-requirements:
       - src/requirements.txt
     source: .
